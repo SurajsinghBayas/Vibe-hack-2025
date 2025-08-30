@@ -12,36 +12,42 @@ import DashboardPage from './pages/DashboardPage'
 function App() {
   return (
     <Box sx={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
-      <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Toolbar sx={{ gap: 2 }}>
-          <IconButton edge="start" color="primary" component={Link} to="/">
-            <MenuBookIcon />
-          </IconButton>
-          <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
-            Vibe Blog
-          </Typography>
-          <TextField size="small" placeholder="Search articles..." InputProps={{ startAdornment: (<InputAdornment position="start"><SearchIcon color="action" /></InputAdornment>) }} sx={{ minWidth: 280, display: { xs: 'none', sm: 'inline-flex' } }} />
-          <Stack direction="row" spacing={1}>
+      <header className="bg-white/80 backdrop-blur sticky top-0 z-30 border-b border-slate-200">
+        <div className="container-lg px-4 py-3 flex items-center gap-4">
+          <Link to="/" className="inline-flex items-center gap-2 text-brand-700 no-underline">
+            <MenuBookIcon className="text-2xl" />
+            <span className="font-semibold text-lg">Vibe Blog</span>
+          </Link>
+
+          <div className="flex-1">
+            <div className="hidden sm:block">
+              <TextField size="small" placeholder="Search articles..." InputProps={{ startAdornment: (<InputAdornment position="start"><SearchIcon color="action" /></InputAdornment>) }} fullWidth />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
             <Button component={Link} to="/dashboard" variant="outlined">Dashboard</Button>
             <Button variant="contained">Sign In</Button>
-          </Stack>
-        </Toolbar>
-      </AppBar>
+          </div>
+        </div>
+      </header>
 
-      <Container maxWidth="lg" sx={{ flex: 1, py: 4 }}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/article/:slug" element={<ArticlePage />} />
-          <Route path="/dashboard/*" element={<DashboardPage />} />
-        </Routes>
-      </Container>
+      <main className="flex-1 container-lg px-4 py-8">
+        <Container maxWidth="lg" sx={{ p: 0 }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/article/:slug" element={<ArticlePage />} />
+            <Route path="/dashboard/*" element={<DashboardPage />} />
+          </Routes>
+        </Container>
+      </main>
 
       <Divider />
-      <Container maxWidth="lg" sx={{ py: 3 }}>
+      <footer className="container-lg px-4 py-6">
         <Typography variant="body2" color="text.secondary">
           © {new Date().getFullYear()} Vibe Blog. All rights reserved.
         </Typography>
-      </Container>
+      </footer>
     </Box>
   )
 }
